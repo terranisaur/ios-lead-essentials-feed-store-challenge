@@ -25,15 +25,15 @@ class FeedStoreChallengeTests: XCTestCase, FailableFeedStoreSpecs {
 	}
 
 	func test_retrieve_hasNoSideEffectsOnEmptyCache() throws {
-//		let sut = try makeSUT()
-//
-//		assertThatRetrieveHasNoSideEffectsOnEmptyCache(on: sut)
+		let sut = try makeSUT()
+
+		assertThatRetrieveHasNoSideEffectsOnEmptyCache(on: sut)
 	}
 
 	func test_retrieve_deliversFoundValuesOnNonEmptyCache() throws {
-//		let sut = try makeSUT()
-//
-//		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
+		let sut = try makeSUT()
+
+		assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(on: sut)
 	}
 
 	func test_retrieve_hasNoSideEffectsOnNonEmptyCache() throws {
