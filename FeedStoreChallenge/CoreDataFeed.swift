@@ -11,18 +11,16 @@ import Foundation
 import CoreData
 
 @objc(CoreDataFeed)
-public class CoreDataFeed: NSManagedObject, Identifiable {}
+class CoreDataFeed: NSManagedObject {
+	@NSManaged public var timestamp: Date
+	@NSManaged public var feedImages: NSOrderedSet
+}
 
 extension CoreDataFeed {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeed> {
 		return NSFetchRequest<CoreDataFeed>(entityName: "CoreDataFeed")
 	}
 
-	@NSManaged public var timestamp: Date
-	@NSManaged public var feedImages: NSOrderedSet
-}
-
-extension CoreDataFeed {
 	var coreDataFeedImages: [CoreDataFeedImage] {
 		return feedImages.compactMap { $0 as? CoreDataFeedImage }
 	}

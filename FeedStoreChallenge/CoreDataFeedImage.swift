@@ -11,17 +11,17 @@ import Foundation
 import CoreData
 
 @objc(CoreDataFeedImage)
-public class CoreDataFeedImage: NSManagedObject, Identifiable {}
-
-extension CoreDataFeedImage {
-	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
-		return NSFetchRequest<CoreDataFeedImage>(entityName: "CoreDataFeedImage")
-	}
-
+class CoreDataFeedImage: NSManagedObject {
 	@NSManaged public var id: UUID
 	@NSManaged public var imageDescription: String?
 	@NSManaged public var location: String?
 	@NSManaged public var url: URL
 
 	@NSManaged public var feed: CoreDataFeed
+}
+
+extension CoreDataFeedImage {
+	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
+		return NSFetchRequest<CoreDataFeedImage>(entityName: "CoreDataFeedImage")
+	}
 }
