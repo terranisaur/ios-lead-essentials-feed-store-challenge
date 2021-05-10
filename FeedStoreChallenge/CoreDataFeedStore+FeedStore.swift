@@ -11,10 +11,10 @@ import CoreData
 
 extension CoreDataFeedStore: FeedStore {
 	public func retrieve(completion: @escaping RetrievalCompletion) {
-		let request: NSFetchRequest<CoreDataFeed> = CoreDataFeed.fetchRequest()
+		let context = self.context
 		context.perform {
 			do {
-				guard let feed = try self.context.fetch(request).first else {
+				guard let feed = try CoreDataFeed.fetchCoreDataFeed(context: context) else {
 					completion(.empty)
 					return
 				}
@@ -34,7 +34,7 @@ extension CoreDataFeedStore: FeedStore {
 	public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
 		let context = self.context
 		context.perform {
-			let coreDataFeed = CoreDataFeed(context: context)
+			let coreDataFeed = CoreDataFeed.createCoreDataFeed(context: context)
 			let images = NSOrderedSet(array: feed.map { localFeedImage in
 				return CoreDataFeedImage.createCoreDataFeedImage(from: localFeedImage, context: context)
 			})

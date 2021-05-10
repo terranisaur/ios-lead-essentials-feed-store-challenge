@@ -17,8 +17,13 @@ class CoreDataFeed: NSManagedObject {
 }
 
 extension CoreDataFeed {
-	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeed> {
-		return NSFetchRequest<CoreDataFeed>(entityName: "CoreDataFeed")
+	static func fetchCoreDataFeed(context: NSManagedObjectContext) throws -> CoreDataFeed? {
+		let request = NSFetchRequest<CoreDataFeed>(entityName: "CoreDataFeed")
+		return try context.fetch(request).first
+	}
+
+	static func createCoreDataFeed(context: NSManagedObjectContext) -> CoreDataFeed {
+		return CoreDataFeed(context: context)
 	}
 
 	var coreDataFeedImages: [CoreDataFeedImage] {
