@@ -23,9 +23,7 @@ extension CoreDataFeedStore: FeedStore {
 					completion(.empty)
 					return
 				}
-				let localFeedImages = images.map { img -> LocalFeedImage in
-					LocalFeedImage(id: img.id, description: img.imageDescription, location: img.location, url: img.url)
-				}
+				let localFeedImages = images.map { $0.localImage() }
 				completion(.found(feed: localFeedImages, timestamp: feed.timestamp))
 			} catch {
 				completion(.failure(NSError(domain: "", code: 0)))
@@ -38,12 +36,7 @@ extension CoreDataFeedStore: FeedStore {
 		context.perform {
 			let coreDataFeed = CoreDataFeed(context: context)
 			let images = NSOrderedSet(array: feed.map { localFeedImage in
-				let image = CoreDataFeedImage(context: context)
-				image.id = localFeedImage.id
-				image.url = localFeedImage.url
-				image.location = localFeedImage.location
-				image.imageDescription = localFeedImage.description
-				return image
+				return CoreDataFeedImage.createCoreDataFeedImage(from: localFeedImage, context: context)
 			})
 			coreDataFeed.feedImages = images
 			coreDataFeed.timestamp = timestamp

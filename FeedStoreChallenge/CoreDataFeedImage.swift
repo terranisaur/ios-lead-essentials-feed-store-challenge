@@ -24,4 +24,17 @@ extension CoreDataFeedImage {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
 		return NSFetchRequest<CoreDataFeedImage>(entityName: "CoreDataFeedImage")
 	}
+
+	static func createCoreDataFeedImage(from localFeedImage: LocalFeedImage, context: NSManagedObjectContext) -> CoreDataFeedImage {
+		let image = CoreDataFeedImage(context: context)
+		image.id = localFeedImage.id
+		image.url = localFeedImage.url
+		image.location = localFeedImage.location
+		image.imageDescription = localFeedImage.description
+		return image
+	}
+
+	func localImage() -> LocalFeedImage {
+		return LocalFeedImage(id: id, description: imageDescription, location: location, url: url)
+	}
 }
