@@ -17,13 +17,7 @@ extension CoreDataFeedStore: FeedStore {
 					completion(.empty)
 					return
 				}
-				
-				let images = feed.localFeedImages
-				if images.isEmpty {
-					completion(.empty)
-				} else {
-					completion(.found(feed: images, timestamp: feed.timestamp))
-				}
+				completion(.found(feed: feed.localFeedImages, timestamp: feed.timestamp))
 			} catch {
 				completion(.failure(error))
 			}
