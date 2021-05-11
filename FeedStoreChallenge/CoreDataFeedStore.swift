@@ -33,7 +33,7 @@ public final class CoreDataFeedStore {
 		context.performAndWait { block(context) }
 	}
 
-	func save(in context: NSManagedObjectContext) throws {
+	static func save(in context: NSManagedObjectContext) throws {
 		do {
 			try context.save()
 		} catch {
