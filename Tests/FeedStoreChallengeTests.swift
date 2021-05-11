@@ -37,27 +37,27 @@ class FeedStoreChallengeTests: XCTestCase, FailableFeedStoreSpecs {
 	}
 
 	func test_retrieve_hasNoSideEffectsOnNonEmptyCache() throws {
-//		let sut = try makeSUT()
-//
-//		assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(on: sut)
+		let sut = try makeSUT()
+
+		assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(on: sut)
 	}
 
 	func test_retrieve_deliversFailureOnRetrievalError() throws {
-//		let stub = NSManagedObjectContext.alwaysFailingFetchStub()
-//		stub.startIntercepting()
-//
-//		let sut = try makeSUT()
-//
-//		assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
+		let stub = NSManagedObjectContext.alwaysFailingFetchStub()
+		stub.startIntercepting()
+
+		let sut = try makeSUT()
+
+		assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
 	}
 
 	func test_retrieve_hasNoSideEffectsOnFailure() throws {
-//		let stub = NSManagedObjectContext.alwaysFailingFetchStub()
-//		stub.startIntercepting()
-//
-//		let sut = try makeSUT()
-//
-//		assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
+		let stub = NSManagedObjectContext.alwaysFailingFetchStub()
+		stub.startIntercepting()
+
+		let sut = try makeSUT()
+
+		assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
 	}
 
 	func test_insert_deliversNoErrorOnEmptyCache() throws {
