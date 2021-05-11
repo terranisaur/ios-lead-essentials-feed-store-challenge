@@ -35,9 +35,7 @@ extension CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			let coreDataFeed = CoreDataFeed.createCoreDataFeed(context: context)
-			let images = NSOrderedSet(array: feed.map { localFeedImage in
-				return CoreDataFeedImage.createCoreDataFeedImage(from: localFeedImage, context: context)
-			})
+			let images = CoreDataFeedImage.coreDataImages(feed: feed, context: context)
 			coreDataFeed.feedImages = images
 			coreDataFeed.timestamp = timestamp
 			do {
