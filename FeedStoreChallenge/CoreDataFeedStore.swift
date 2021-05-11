@@ -27,4 +27,13 @@ public final class CoreDataFeedStore {
 		)
 		context = container.newBackgroundContext()
 	}
+
+	func save(in context: NSManagedObjectContext) throws {
+		do {
+			try context.save()
+		} catch {
+			context.rollback()
+			throw error
+		}
+	}
 }

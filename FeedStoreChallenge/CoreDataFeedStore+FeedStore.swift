@@ -39,10 +39,9 @@ extension CoreDataFeedStore: FeedStore {
 				coreDataFeed.feedImages = images
 				coreDataFeed.timestamp = timestamp
 
-				try context.save()
+				try self.save(in: context)
 				completion(nil)
 			} catch {
-				context.rollback()
 				completion(error)
 			}
 		}
@@ -53,10 +52,9 @@ extension CoreDataFeedStore: FeedStore {
 		context.perform {
 			do {
 				try CoreDataFeed.deleteExistingFeed(from: context)
-				try context.save()
+				try self.save(in: context)
 				completion(nil)
 			} catch {
-				context.rollback()
 				completion(error)
 			}
 		}
