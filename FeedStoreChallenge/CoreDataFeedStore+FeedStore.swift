@@ -42,6 +42,7 @@ extension CoreDataFeedStore: FeedStore {
 				try context.save()
 				completion(nil)
 			} catch {
+				context.rollback()
 				completion(NSError(domain: "", code: 0))
 			}
 		}
