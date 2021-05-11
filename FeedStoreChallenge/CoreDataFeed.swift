@@ -26,7 +26,7 @@ extension CoreDataFeed {
 		return CoreDataFeed(context: context)
 	}
 
-	var coreDataFeedImages: [CoreDataFeedImage] {
-		return feedImages.compactMap { $0 as? CoreDataFeedImage }
+	var coreDataFeedImages: [LocalFeedImage] {
+		return feedImages.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage() }
 	}
 }

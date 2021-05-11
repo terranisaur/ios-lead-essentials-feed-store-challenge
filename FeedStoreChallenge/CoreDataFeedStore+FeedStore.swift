@@ -18,13 +18,12 @@ extension CoreDataFeedStore: FeedStore {
 					completion(.empty)
 					return
 				}
-				let images = Array(feed.coreDataFeedImages)
+				let images = feed.coreDataFeedImages
 				if images.isEmpty {
 					completion(.empty)
 					return
 				}
-				let localFeedImages = images.map { $0.localImage() }
-				completion(.found(feed: localFeedImages, timestamp: feed.timestamp))
+				completion(.found(feed: images, timestamp: feed.timestamp))
 			} catch {
 				completion(.failure(NSError(domain: "", code: 0)))
 			}
