@@ -25,7 +25,7 @@ extension CoreDataFeedStore: FeedStore {
 				}
 				completion(.found(feed: images, timestamp: feed.timestamp))
 			} catch {
-				completion(.failure(NSError(domain: "", code: 0)))
+				completion(.failure(error))
 			}
 		}
 	}
@@ -43,7 +43,7 @@ extension CoreDataFeedStore: FeedStore {
 				completion(nil)
 			} catch {
 				context.rollback()
-				completion(NSError(domain: "", code: 0))
+				completion(error)
 			}
 		}
 	}
@@ -57,7 +57,7 @@ extension CoreDataFeedStore: FeedStore {
 				completion(nil)
 			} catch {
 				context.rollback()
-				completion(NSError(domain: "", code: 0))
+				completion(error)
 			}
 		}
 	}
