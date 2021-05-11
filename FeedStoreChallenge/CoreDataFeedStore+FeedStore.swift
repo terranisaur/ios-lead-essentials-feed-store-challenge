@@ -14,11 +14,11 @@ extension CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				guard let feed = try CoreDataFeed.fetchCoreDataFeed(context: context) else {
+				guard let feed = try CoreDataFeed.fetch(context: context) else {
 					completion(.empty)
 					return
 				}
-				let images = feed.coreDataFeedImages
+				let images = feed.localFeedImages
 				if images.isEmpty {
 					completion(.empty)
 					return
@@ -34,7 +34,7 @@ extension CoreDataFeedStore: FeedStore {
 		let context = self.context
 		context.perform {
 			do {
-				let coreDataFeed = try CoreDataFeed.createUniqueCoreDataFeed(context: context)
+				let coreDataFeed = try CoreDataFeed.createUniqueFeed(context: context)
 				let images = CoreDataFeedImage.coreDataImages(feed: feed, context: context)
 				coreDataFeed.feedImages = images
 				coreDataFeed.timestamp = timestamp

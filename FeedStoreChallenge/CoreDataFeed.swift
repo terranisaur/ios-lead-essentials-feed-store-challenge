@@ -17,23 +17,23 @@ class CoreDataFeed: NSManagedObject {
 }
 
 extension CoreDataFeed {
-	static func fetchCoreDataFeed(context: NSManagedObjectContext) throws -> CoreDataFeed? {
+	static func fetch(context: NSManagedObjectContext) throws -> CoreDataFeed? {
 		let request = NSFetchRequest<CoreDataFeed>(entityName: "CoreDataFeed")
 		return try context.fetch(request).first
 	}
 
-	static func createUniqueCoreDataFeed(context: NSManagedObjectContext) throws -> CoreDataFeed {
+	static func createUniqueFeed(context: NSManagedObjectContext) throws -> CoreDataFeed {
 		try deleteExistingFeed(from: context)
 		return CoreDataFeed(context: context)
 	}
 
 	static func deleteExistingFeed(from context: NSManagedObjectContext) throws {
-		if let existingFeed = try fetchCoreDataFeed(context: context) {
+		if let existingFeed = try fetch(context: context) {
 			context.delete(existingFeed)
 		}
 	}
 
-	var coreDataFeedImages: [LocalFeedImage] {
+	var localFeedImages: [LocalFeedImage] {
 		return feedImages.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage() }
 	}
 }
