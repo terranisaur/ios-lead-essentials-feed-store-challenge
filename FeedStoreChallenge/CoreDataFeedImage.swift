@@ -21,11 +21,11 @@ class CoreDataFeedImage: NSManagedObject {
 }
 
 extension CoreDataFeedImage {
-	@nonobjc public class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
+	@nonobjc class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
 		return NSFetchRequest<CoreDataFeedImage>(entityName: "CoreDataFeedImage")
 	}
 
-	static func coreDataImages(feed: [LocalFeedImage], context: NSManagedObjectContext) -> NSOrderedSet {
+	static func images(feed: [LocalFeedImage], context: NSManagedObjectContext) -> NSOrderedSet {
 		return NSOrderedSet(array: feed.map { localFeedImage in
 			return CoreDataFeedImage.image(from: localFeedImage, context: context)
 		})
@@ -40,7 +40,7 @@ extension CoreDataFeedImage {
 		return image
 	}
 
-	func localImage() -> LocalFeedImage {
+	var localImage: LocalFeedImage {
 		return LocalFeedImage(id: id, description: imageDescription, location: location, url: url)
 	}
 }

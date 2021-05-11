@@ -34,6 +34,6 @@ extension CoreDataFeed {
 	}
 
 	var localFeedImages: [LocalFeedImage] {
-		return feedImages.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage() }
+		return feedImages.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage }
 	}
 }
