@@ -23,10 +23,14 @@ extension CoreDataFeed {
 	}
 
 	static func createUniqueCoreDataFeed(context: NSManagedObjectContext) throws -> CoreDataFeed {
+		try deleteExistingFeed(from: context)
+		return CoreDataFeed(context: context)
+	}
+
+	static func deleteExistingFeed(from context: NSManagedObjectContext) throws {
 		if let existingFeed = try fetchCoreDataFeed(context: context) {
 			context.delete(existingFeed)
 		}
-		return CoreDataFeed(context: context)
 	}
 
 	var coreDataFeedImages: [LocalFeedImage] {

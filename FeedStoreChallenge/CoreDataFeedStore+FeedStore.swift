@@ -49,6 +49,16 @@ extension CoreDataFeedStore: FeedStore {
 	}
 
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-		completion(nil)
+		let context = self.context
+		context.perform {
+			do {
+				try CoreDataFeed.deleteExistingFeed(from: context)
+				try context.save()
+				completion(nil)
+			} catch {
+				context.rollback()
+				completion(NSError(domain: "", code: 0))
+			}
+		}
 	}
 }
