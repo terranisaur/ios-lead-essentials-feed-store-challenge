@@ -22,7 +22,10 @@ extension CoreDataFeed {
 		return try context.fetch(request).first
 	}
 
-	static func createCoreDataFeed(context: NSManagedObjectContext) -> CoreDataFeed {
+	static func createUniqueCoreDataFeed(context: NSManagedObjectContext) throws -> CoreDataFeed {
+		if let existingFeed = try fetchCoreDataFeed(context: context) {
+			context.delete(existingFeed)
+		}
 		return CoreDataFeed(context: context)
 	}
 

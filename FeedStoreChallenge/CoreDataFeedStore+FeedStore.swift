@@ -33,11 +33,12 @@ extension CoreDataFeedStore: FeedStore {
 	public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
 		let context = self.context
 		context.perform {
-			let coreDataFeed = CoreDataFeed.createCoreDataFeed(context: context)
-			let images = CoreDataFeedImage.coreDataImages(feed: feed, context: context)
-			coreDataFeed.feedImages = images
-			coreDataFeed.timestamp = timestamp
 			do {
+				let coreDataFeed = try CoreDataFeed.createUniqueCoreDataFeed(context: context)
+				let images = CoreDataFeedImage.coreDataImages(feed: feed, context: context)
+				coreDataFeed.feedImages = images
+				coreDataFeed.timestamp = timestamp
+
 				try context.save()
 				completion(nil)
 			} catch {
