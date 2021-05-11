@@ -11,8 +11,7 @@ import CoreData
 
 extension CoreDataFeedStore: FeedStore {
 	public func retrieve(completion: @escaping RetrievalCompletion) {
-		let context = self.context
-		context.perform {
+		perform { context in
 			do {
 				guard let feed = try CoreDataFeed.fetch(context: context) else {
 					completion(.empty)
@@ -31,15 +30,14 @@ extension CoreDataFeedStore: FeedStore {
 	}
 
 	public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
-		let context = self.context
-		context.perform {
+		perform { [weak self] context in
 			do {
 				let coreDataFeed = try CoreDataFeed.createUniqueFeed(context: context)
 				let images = CoreDataFeedImage.images(feed: feed, context: context)
 				coreDataFeed.feedImages = images
 				coreDataFeed.timestamp = timestamp
 
-				try self.save(in: context)
+				try self?.save(in: context)
 				completion(nil)
 			} catch {
 				completion(error)
@@ -48,11 +46,10 @@ extension CoreDataFeedStore: FeedStore {
 	}
 
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-		let context = self.context
-		context.perform {
+		perform { [weak self] context in
 			do {
 				try CoreDataFeed.deleteExistingFeed(from: context)
-				try self.save(in: context)
+				try self?.save(in: context)
 				completion(nil)
 			} catch {
 				completion(error)

@@ -28,6 +28,11 @@ public final class CoreDataFeedStore {
 		context = container.newBackgroundContext()
 	}
 
+	func perform(block: @escaping (NSManagedObjectContext) -> Void) {
+		let context = self.context
+		context.perform { block(context) }
+	}
+
 	func save(in context: NSManagedObjectContext) throws {
 		do {
 			try context.save()
