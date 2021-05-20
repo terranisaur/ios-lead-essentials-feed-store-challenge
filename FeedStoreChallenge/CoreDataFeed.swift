@@ -11,9 +11,9 @@ import Foundation
 import CoreData
 
 @objc(CoreDataFeed)
-class CoreDataFeed: NSManagedObject {
-	@NSManaged public var timestamp: Date
-	@NSManaged public var feedImages: NSOrderedSet
+final class CoreDataFeed: NSManagedObject {
+	@NSManaged var timestamp: Date
+	@NSManaged var feedImages: NSOrderedSet
 }
 
 extension CoreDataFeed {
