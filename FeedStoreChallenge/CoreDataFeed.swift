@@ -13,7 +13,7 @@ import CoreData
 @objc(CoreDataFeed)
 final class CoreDataFeed: NSManagedObject {
 	@NSManaged var timestamp: Date
-	@NSManaged var feedImages: NSOrderedSet
+	@NSManaged var images: NSOrderedSet
 }
 
 extension CoreDataFeed {
@@ -34,6 +34,6 @@ extension CoreDataFeed {
 	}
 
 	var localFeedImages: [LocalFeedImage] {
-		return feedImages.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage }
+		return images.compactMap { $0 as? CoreDataFeedImage }.map { $0.localImage }
 	}
 }

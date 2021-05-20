@@ -29,7 +29,7 @@ extension CoreDataFeedStore: FeedStore {
 			do {
 				let coreDataFeed = try CoreDataFeed.createUniqueFeed(context: context)
 				let images = CoreDataFeedImage.images(feed: feed, context: context)
-				coreDataFeed.feedImages = images
+				coreDataFeed.images = images
 				coreDataFeed.timestamp = timestamp
 
 				try CoreDataFeedStore.save(in: context)
