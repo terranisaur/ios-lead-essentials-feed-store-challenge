@@ -9,7 +9,7 @@ public final class CoreDataFeedStore {
 	private static let model = NSManagedObjectModel(name: modelName, in: Bundle(for: CoreDataFeedStore.self))
 
 	private let container: NSPersistentContainer
-	let context: NSManagedObjectContext
+	private let context: NSManagedObjectContext
 
 	struct ModelNotFound: Error {
 		let modelName: String
