@@ -21,10 +21,6 @@ class CoreDataFeedImage: NSManagedObject {
 }
 
 extension CoreDataFeedImage {
-	@nonobjc class func fetchRequest() -> NSFetchRequest<CoreDataFeedImage> {
-		return NSFetchRequest<CoreDataFeedImage>(entityName: "CoreDataFeedImage")
-	}
-
 	static func images(feed: [LocalFeedImage], context: NSManagedObjectContext) -> NSOrderedSet {
 		return NSOrderedSet(array: feed.map { localFeedImage in
 			return CoreDataFeedImage.image(from: localFeedImage, context: context)
