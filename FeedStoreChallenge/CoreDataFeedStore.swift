@@ -30,7 +30,7 @@ public final class CoreDataFeedStore {
 
 	func perform(block: @escaping (NSManagedObjectContext) -> Void) {
 		let context = self.context
-		context.performAndWait { block(context) }
+		context.perform { block(context) }
 	}
 
 	static func save(in context: NSManagedObjectContext) throws {
