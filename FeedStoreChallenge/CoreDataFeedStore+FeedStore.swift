@@ -44,7 +44,9 @@ extension CoreDataFeedStore: FeedStore {
 		perform { context in
 			do {
 				try CoreDataFeed.deleteExistingFeed(from: context)
-				try CoreDataFeedStore.save(in: context)
+				if context.hasChanges {
+					try CoreDataFeedStore.save(in: context)
+				}
 				completion(nil)
 			} catch {
 				completion(error)
