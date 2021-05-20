@@ -11,13 +11,13 @@ import Foundation
 import CoreData
 
 @objc(CoreDataFeedImage)
-class CoreDataFeedImage: NSManagedObject {
-	@NSManaged public var id: UUID
-	@NSManaged public var imageDescription: String?
-	@NSManaged public var location: String?
-	@NSManaged public var url: URL
+final class CoreDataFeedImage: NSManagedObject {
+	@NSManaged var id: UUID
+	@NSManaged var imageDescription: String?
+	@NSManaged var location: String?
+	@NSManaged var url: URL
 
-	@NSManaged public var feed: CoreDataFeed
+	@NSManaged var feed: CoreDataFeed
 }
 
 extension CoreDataFeedImage {
